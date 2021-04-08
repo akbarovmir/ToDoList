@@ -1,0 +1,26 @@
+extends layout.pug
+
+block Content 
+
+  form.form(action='/add' method='POST')
+    input.input(type='text' placeholder='Create your Daily Work......' name='TaskData')
+    button.AddingButton Create  
+  if wrong
+    p.wrong Work is required
+
+  if add 
+    p.add Work is Created 
+
+  if fail
+    p.fail Work is deleted
+  div.TaskDatas
+    if TaskDatas.length
+      each TaskData in TaskDatas 
+        p.TaskData
+          if TaskData.adding
+            a.adding(href=`/${ TaskData.id}/update`) #{ TaskData.description }
+          else 
+            a.try(href=`/${ TaskData.id}/update`) #{ TaskData.description }
+          a.remove(href=`/${ TaskData.id }/delete`) Delete
+    else
+      p.TaskData No Works yet
